@@ -4,10 +4,60 @@ const IssueModel = require("../models").Issue;
 const ProjectModel = require("../models").Project;
 const ObjectId = mongoose.Types.ObjectId;
 
-module.exports = function (app) {
+module.exports = function(app) {
+  app
+  .get("/api/issues/testing", (req, res) => {
+    res.json(
+      [
+        {
+          "issue_title": "title",
+          "issue_text": "text",
+          "created_on": "2023-02-07T05:34:27.056Z",
+          "updated_on": "2023-02-07T05:34:27.056Z",
+          "created_by": "me",
+          "assigned_to": "",
+          "open": true,
+          "status_text": "",
+          "_id": "63e1e2e3f20f12e4dff464e1"
+        },
+        {
+          "issue_title": "title1",
+          "issue_text": "text1",
+          "created_on": "2023-02-07T05:34:37.611Z",
+          "updated_on": "2023-02-07T05:34:37.611Z",
+          "created_by": "me1",
+          "assigned_to": "me1",
+          "open": false,
+          "status_text": "",
+          "_id": "63e1e301f20f12e4dff464f2"
+        },
+        {
+          "issue_title": "title2",
+          "issue_text": "text2",
+          "created_on": "2023-02-07T05:34:47.611Z",
+          "updated_on": "2023-02-07T05:34:47.611Z",
+          "created_by": "me2",
+          "open": true,
+          "status_text": "",
+          "_id": "63e1e301f20f12e4dff464f3"
+        },
+        {
+          "issue_title": "title3",
+          "issue_text": "text3",
+          "created_on": "2023-02-07T05:34:57.611Z",
+          "updated_on": "2023-02-07T05:34:57.611Z",
+          "created_by": "me3",
+          "open": true,
+          "status_text": "",
+          "_id": "63e1e301f20f12e4dff464f4"
+        }
+
+      ]
+    )
+  })
   app
     .route("/api/issues/:project")
-    .get(function (req, res) {
+    .get(function(req, res) {
       let projectName = req.params.project;
       //?open=true&assigned_to=Joe
       const {
@@ -54,7 +104,7 @@ module.exports = function (app) {
       });
     })
 
-    .post(function (req, res) {
+    .post(function(req, res) {
       let project = req.params.project;
       const {
         issue_title,
@@ -101,7 +151,7 @@ module.exports = function (app) {
       });
     })
 
-    .put(function (req, res) {
+    .put(function(req, res) {
       let project = req.params.project;
       const {
         _id,
@@ -155,7 +205,7 @@ module.exports = function (app) {
       });
     })
 
-    .delete(function (req, res) {
+    .delete(function(req, res) {
       let project = req.params.project;
       const { _id } = req.body;
       if (!_id) {
